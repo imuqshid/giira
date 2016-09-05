@@ -10,6 +10,6 @@ public class AppConfig {
     // Server user register url
     public static String URL_REGISTER = AppConfig.URL_BASE+"/giira/register.php";
 
-    public static String URL_BASE="http://192.168.1.2/";
+    public static String URL_BASE="http://192.168.1.2";
 
 }
