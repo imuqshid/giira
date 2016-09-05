@@ -55,7 +55,6 @@ dependencies {
     compile 'com.github.wangjiegulu:RapidFloatingActionButton:1.0.3'
     compile 'com.getbase:floatingactionbutton:1.10.1'
     compile 'com.google.android.gms:play-services:8.4.0'
-    compile 'com.firebase:firebase-client-android:2.5.2+'
     compile 'com.prolificinteractive:material-calendarview:1.4.0'
     compile 'com.google.android.gms:play-services:3.1.36'
     compile 'com.android.support:multidex:1.0.1'
