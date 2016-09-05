@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Sample</string>
+    <string name="app_name">Giira</string>
     <string name="send"> Send </string>
 
     <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyB9ie8Mlynzf_u0Aph3zCQLqqRCxZyLmec</string>
