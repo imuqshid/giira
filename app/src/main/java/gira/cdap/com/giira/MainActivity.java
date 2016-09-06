@@ -126,9 +126,19 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
             public void onClick(View view) {
                 Intent i = new Intent(MainActivity.this,
-                        ProfileFragment.class);
+                        NotificationLayout.class);
                 startActivity(i);
                 finish();
+            }
+        });
+
+        ImageButton homeIcon = (ImageButton) findViewById(R.id.homeIcon);
+        homeIcon.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(),
+                        "You already in Dashboard", Toast.LENGTH_LONG)
+                        .show();
             }
         });
 
