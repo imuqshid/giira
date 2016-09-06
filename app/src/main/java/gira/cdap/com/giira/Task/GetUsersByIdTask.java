@@ -106,7 +106,6 @@ ProgressDialog prgDialog;
                  email=user.getJSONObject(i).getString("email");
 
             }
-            Toast.makeText(context,name+"    "+email,Toast.LENGTH_SHORT ).show();
             userProfileActivity.set(name,email);
 
 

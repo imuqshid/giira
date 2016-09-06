@@ -64,7 +64,24 @@
                     </android.support.design.widget.TextInputLayout>
 
                 </LinearLayout>
-                <LinearLayout
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="15dp">
+
+                <MultiAutoCompleteTextView
+                    android:id="@+id/members_tf"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:textColor="@color/accent"
+                    android:hint=" Members"
+                />
+                </LinearLayout>
+                <!--LinearLayout
                     android:id="@+id/linearLayout"
                     android:orientation="vertical"
                     android:layout_width="match_parent"
@@ -78,7 +95,7 @@
                         android:layout_marginTop="8dp">
                     </FrameLayout>
 
-                </LinearLayout>
+                </LinearLayout-->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"

@@ -6,9 +6,11 @@ import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.MultiAutoCompleteTextView;
 import android.widget.TextView;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.Toast;
@@ -23,7 +25,7 @@ public class NewTeam extends AppCompatActivity implements View.OnClickListener {
 
     private TextView pageTitle;
     private static final int ADD_MEMBER = 9000;
-    EditText name,description,mem1,mem2,mem3, mem4,mem5,mem6,mem7,mem8,mem9, mem10;
+    EditText name,description,members;
     int count =1;
 
     ImageButton homeIcon;
@@ -31,6 +33,15 @@ public class NewTeam extends AppCompatActivity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.new_team);
+
+        MultiAutoCompleteTextView multiAutoCompleteTextView=(MultiAutoCompleteTextView)findViewById(R.id.members_tf);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+                getApplicationContext(),R.layout.text,
+                USERS);
+        multiAutoCompleteTextView.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
+
+        multiAutoCompleteTextView.setAdapter(adapter);
+
 
         pageTitle = (TextView)findViewById(R.id.pageTitle);
         pageTitle.setText("New Team");
@@ -50,8 +61,7 @@ public class NewTeam extends AppCompatActivity implements View.OnClickListener {
 
         getElements();
 
-
-        LinearLayout ll = (LinearLayout)findViewById(R.id.linearLayout);
+        /*LinearLayout ll = (LinearLayout)findViewById(R.id.linearLayout);
         TextView tv = new TextView(this);
         tv.setVisibility(View.VISIBLE);
         tv.setText("Add member");
@@ -63,64 +73,34 @@ public class NewTeam extends AppCompatActivity implements View.OnClickListener {
         tv.setId(ADD_MEMBER);
         tv.setOnClickListener(this);
 
-        ll.addView(tv);
-
-
+        ll.addView(tv);*/
 
     }
+
+    static final String[] USERS = new String[] { "Cristiano Ronaldo","David Beckham", "Sabhan","Chrishana","Zlatan Ibrahimovic","Rooney", "Shiva"
+
+    };
 
 
     @Override
     public void onClick(View v) {
-        //add TextInput Layouts
 
-        for(int i = 0; i < 1; i++) {
-
-            LinearLayout ll = (LinearLayout)findViewById(R.id.linearLayout);
-            TextInputEditText ti = new TextInputEditText(this);
-            ti.setHint("Member Name " + count);
-            ti.setId(count);
-            ti.setTextSize(15);
-            ti.setPaddingRelative(25,48,25,48);
-            ti.setVisibility(View.VISIBLE);
-            ll.addView(ti);
-            count++;
-//            Toast toast = Toast.makeText(this, "New Member field Added!", Toast.LENGTH_LONG);
-
-        }
     }
 
     private void getElements() {
 
         name= (EditText) findViewById(R.id.name);
         description= (EditText) findViewById(R.id.description);
+        members = (MultiAutoCompleteTextView)findViewById(R.id.members_tf);
     }
 
     public void addTeam(View v){
         String namef=name.getText().toString();
         String descriptionf=description.getText().toString();
+        String membersf=members.getText().toString();
 
-        if (mem1 != null || mem2 != null || mem3 != null || mem4 != null || mem5 != null){
-            String mem1f = mem1.getText().toString();
-            String mem2f = mem2.getText().toString();
-            String mem3f = mem3.getText().toString();
-            String mem4f = mem4.getText().toString();
-            String mem5f = mem5.getText().toString();
-
-            AddTeamTask addTeamTask = new AddTeamTask(getApplicationContext(), namef, descriptionf, mem1f, mem2f, mem3f, mem4f, mem5f, this);
-            addTeamTask.execute();
-            Toast toast = Toast.makeText(this, "With Mem", Toast.LENGTH_LONG);
-
-
-        }
-
-        else
-        {
-            AddTeamTask addTeamTask = new AddTeamTask(getApplicationContext(), namef, descriptionf, this);
-            addTeamTask.execute();
-            Toast toast = Toast.makeText(this, "Without Mem", Toast.LENGTH_LONG);
-        }
-
+        AddTeamTask addTeamTask = new AddTeamTask(getApplicationContext(), namef, descriptionf, membersf, this);
+        addTeamTask.execute();
 
 
     }

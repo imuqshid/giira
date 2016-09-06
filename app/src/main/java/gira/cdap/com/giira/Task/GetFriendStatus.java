@@ -85,7 +85,6 @@ public class GetFriendStatus extends AsyncTask<String,Void,String> {
         {
             try {
                 status=json.getString("status");
-                Toast.makeText(context, status, Toast.LENGTH_SHORT).show();
                 userProfileActivity.setButtonText(status);
             } catch (JSONException e) {
                 e.printStackTrace();

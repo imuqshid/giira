@@ -20,7 +20,7 @@ import gira.cdap.com.giira.Service.ServiceHandler;
 
 
 /**
- * Created by Perceptor on 6/13/2016.
+ * Created by Muqshid on 6/13/2016.
  */
 
 public class AddEventTask extends AsyncTask<String,Void,String> {
@@ -28,14 +28,14 @@ public class AddEventTask extends AsyncTask<String,Void,String> {
     ServiceHandler serviceHandler ;
     InputStream inputStream;
     JSONParser parsing;
-    String name,description,location,date,time,members,team,imagepath;
+    String name,description,location,date,time,team,members,imagepath;
     NewEvent newEvent;
     int imgchck=0;
 
     Context context;
 
 
-    public AddEventTask(Context context, String name,String description,String location,String date,String time,String members,String team,String imagepath, NewEvent newEvent)
+    public AddEventTask(Context context, String name,String description,String location,String date,String time,String team,String members,String imagepath, NewEvent newEvent)
     {
         this.context=context;
         this.name=name;
@@ -43,14 +43,14 @@ public class AddEventTask extends AsyncTask<String,Void,String> {
         this.location=location;
         this.date=date;
         this.time=time;
-        this.members=members;
         this.team=team;
+        this.members=members;
         this.imagepath=imagepath;
         this.newEvent=newEvent;
         this.imgchck=1;
     }
 
-    public AddEventTask(Context context, String name,String description,String location,String date,String time,String members,String team, NewEvent newEvent)
+    public AddEventTask(Context context, String name,String description,String location,String date,String time,String team,String members, NewEvent newEvent)
     {
         this.context=context;
         this.name=name;
@@ -58,8 +58,8 @@ public class AddEventTask extends AsyncTask<String,Void,String> {
         this.location=location;
         this.date=date;
         this.time=time;
-        this.members=members;
         this.team=team;
+        this.members=members;
         this.newEvent=newEvent;
         this.imgchck=0;
     }
@@ -78,9 +78,9 @@ public class AddEventTask extends AsyncTask<String,Void,String> {
         value.add(new BasicNameValuePair("location", location));
         value.add(new BasicNameValuePair("date", date));
         value.add(new BasicNameValuePair("time", time));
-        value.add(new BasicNameValuePair("members", members));
         value.add(new BasicNameValuePair("team", team));
-        android.util.Log.d("Task","AddReviewTask");
+        value.add(new BasicNameValuePair("members",members));
+        android.util.Log.d("Task","AddEventTask");
         serviceHandler = new ServiceHandler();
         inputStream = serviceHandler.makeServiceCall(
                 serverURL.local_host_url+"giira/index.php/event/addevent",2,

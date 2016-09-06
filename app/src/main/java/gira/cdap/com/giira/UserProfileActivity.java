@@ -64,7 +64,6 @@ public class UserProfileActivity extends AppCompatActivity {
         if (!session.isLoggedIn()) {
             logoutUser();
         }
-
         // Fetching user details from sqlite
 
         id=getIntent().getExtras().getString("id");

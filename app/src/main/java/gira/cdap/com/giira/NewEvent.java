@@ -25,6 +25,7 @@ import android.widget.EditText;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageButton;
+import android.widget.MultiAutoCompleteTextView;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -57,7 +58,9 @@ public class NewEvent extends ActionBarActivity {
 
     private TextView pageTitle;
     private ImageButton homeIcon;
-    EditText name,description,location,members,team;
+    EditText name,description;
+    MultiAutoCompleteTextView members;
+    AutoCompleteTextView team,location;
 
     AutoCompleteTextView autoCompleteLocation;
 
@@ -131,6 +134,36 @@ public class NewEvent extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.new_event);
 
+        MultiAutoCompleteTextView members=(MultiAutoCompleteTextView)findViewById(R.id.members_tf);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+                getApplicationContext(),R.layout.text,
+                USERS);
+        members.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
+
+        members.setAdapter(adapter);
+
+        //---------------------
+
+        AutoCompleteTextView location=(AutoCompleteTextView)findViewById(R.id.location_tf);
+        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(
+                getApplicationContext(),R.layout.text,
+                LOCATIONS);
+
+        location.setAdapter(adapter2);
+
+        //-------------------------
+
+        AutoCompleteTextView team=(AutoCompleteTextView)findViewById(R.id.team_tf);
+        ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(
+                getApplicationContext(),R.layout.text,
+                TEAM);
+
+        team.setAdapter(adapter1);
+
+        //------------------------
+
+
+
         final Calendar cal = Calendar.getInstance();
         year_x = cal.get(Calendar.YEAR);
         month_x = cal.get(Calendar.MONTH);
@@ -160,13 +193,23 @@ public class NewEvent extends ActionBarActivity {
         getElements();
     }
 
+    static final String[] USERS = new String[] { "Cristiano Ronaldo","David Beckham", "Sabhan","Chrishana","Zlatan Ibrahimovic","Rooney", "Shiva"
+    };
+
+    static final String[] TEAM = new String[] { "Team A","Team B", "Team C","Team D","Team E","Team F", "Team G"
+    };
+
+    static final String[] LOCATIONS = new String[] { "Sigiriya","Temple of the tooth", "Hortain Plains National Park","Yala National park","Adam's park","Kelaniya Raja Maha Viharaya", "Sinharaja Forest"
+    };
+
+
     private void getElements() {
 
         name= (EditText) findViewById(R.id.name);
         description= (EditText) findViewById(R.id.description);
-        location= (EditText) findViewById(R.id.location);
-        members= (EditText) findViewById(R.id.member);
-        team= (EditText) findViewById(R.id.team);
+        location= (AutoCompleteTextView) findViewById(R.id.location);
+        team= (AutoCompleteTextView) findViewById(R.id.team);
+        members=(MultiAutoCompleteTextView)findViewById(R.id.members_tf);
 
     }
 
@@ -252,22 +295,22 @@ public class NewEvent extends ActionBarActivity {
         String namef=name.getText().toString();
         String descriptionf=description.getText().toString();
         String locationf=location.getText().toString();
-        String membersf=members.getText().toString();
         String teamf=team.getText().toString();
         String datef=date.getText().toString();
         String timef=time.getText().toString();
+        String memberf=members.getText().toString();
 
         if(bitmap !=null)
         {
             String imagepathf=bitmap.toString();
-            AddEventTask addEventTask=new AddEventTask(getApplicationContext(),namef,descriptionf,locationf,datef,timef,membersf,teamf,imagepathf,this);
+            AddEventTask addEventTask=new AddEventTask(getApplicationContext(),namef,descriptionf,locationf,datef,timef,teamf,memberf,imagepathf,this);
             addEventTask.execute();
         }
 
         else
 
         {
-            AddEventTask addEventTask=new AddEventTask(getApplicationContext(),namef,descriptionf,locationf,datef,timef,membersf,teamf,this);
+            AddEventTask addEventTask=new AddEventTask(getApplicationContext(),namef,descriptionf,locationf,datef,timef,teamf,memberf,this);
             addEventTask.execute();
         }
 

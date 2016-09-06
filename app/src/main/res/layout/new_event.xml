@@ -61,22 +61,14 @@
                 </android.support.design.widget.TextInputLayout>
 
                 <!--  Location Label -->
-                <android.support.design.widget.TextInputLayout
-                    android.theme="style/description"
+                <AutoCompleteTextView
+                    android:id="@+id/location_tf"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="8dp"
-                    android:textColor="@color/white">
-                    <EditText android:id="@+id/location"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="textAutoComplete"
-                        android:hint="Location"
-                        android:textColor="@color/accent"
-                        android:textColorHint="@color/white" />
-
-                </android.support.design.widget.TextInputLayout>
+                    android:textColor="@color/accent"
+                    android:hint=" Location"/>
 
                 <!--  Date Label -->
                 <android.support.design.widget.TextInputLayout
@@ -146,7 +138,7 @@
                 </LinearLayout>
 
                 <!--  Team Label -->
-                <android.support.design.widget.TextInputLayout
+                <!--android.support.design.widget.TextInputLayout
                     android.theme="style/description"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -161,25 +153,28 @@
                         android:textColor="@color/accent"
                         android:textColorHint="@color/white" />
 
-                </android.support.design.widget.TextInputLayout>
+                </android.support.design.widget.TextInputLayout-->
+                <AutoCompleteTextView
 
-                <!--  Members Label -->
-                <android.support.design.widget.TextInputLayout
-                    android.theme="style/description"
+                    android:id="@+id/team_tf"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="8dp"
-                    android:textColor="@color/white">
-                    <EditText android:id="@+id/member"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="textImeMultiLine"
-                        android:hint="Choose Members"
-                        android:textColor="@color/accent"
-                        android:textColorHint="@color/white" />
+                    android:hint="Team Name"
+                    android:textColor="@color/accent">
+                </AutoCompleteTextView>
 
-                </android.support.design.widget.TextInputLayout>
+                <MultiAutoCompleteTextView
+                    android:id="@+id/members_tf"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:textColor="@color/accent"
+                    android:hint=" Members"/>
+
+
 
             </LinearLayout>
             <LinearLayout
@@ -201,7 +196,7 @@
                     android:textAlignment="center" />
 
 
-                <Button
+                <!--Button
                     android:id="@+id/event_cancel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -210,7 +205,7 @@
                     android:text="Cancel"
                     android:textColor="@color/white"
                     android:backgroundTint="@color/accent"
-                    android:textAlignment="center" />
+                    android:textAlignment="center" /-->
 
             </LinearLayout>
 

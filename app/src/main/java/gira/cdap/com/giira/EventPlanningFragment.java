@@ -62,7 +62,7 @@ public class EventPlanningFragment extends AppCompatActivity implements View.OnC
         fab2.setOnClickListener(this);
 
         pageTitle = (TextView)findViewById(R.id.pageTitle);
-        pageTitle.setText("Event");
+        pageTitle.setText("Events");
 
         homeIcon = (ImageButton) findViewById(R.id.back);
         homeIcon.setOnClickListener(new View.OnClickListener() {

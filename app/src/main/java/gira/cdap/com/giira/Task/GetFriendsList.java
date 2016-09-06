@@ -14,57 +14,52 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import gira.cdap.com.giira.NewTeam;
 import gira.cdap.com.giira.Service.JSONParser;
 import gira.cdap.com.giira.Service.ServiceHandler;
+import gira.cdap.com.giira.UserProfileActivity;
 
 
-/**
- * Created by Muqshid on 6/13/2016.
- */
 
-public class AddTeamTask extends AsyncTask<String,Void,String> {
+
+public class GetFriendsList extends AsyncTask<String,Void,String> {
 
     ServiceHandler serviceHandler ;
     InputStream inputStream;
     JSONParser parsing;
-    String name,description,members;
-    NewTeam newTeam;
+    String user1,user2;
+    JSONObject json;
+    UserProfileActivity userProfileActivity;
 
     Context context;
 
 
-    public AddTeamTask(Context context, String name, String description, String members, NewTeam newTeam)
+    public GetFriendsList(Context context, String user1, String user2, UserProfileActivity userProfileActivity)
     {
         this.context=context;
-        this.name=name;
-        this.description=description;
-        this.members=members;
-
-        this.newTeam=newTeam;
+        this.user1=user1;
+        this.user2=user2;
+        this.userProfileActivity=userProfileActivity;
 
     }
+
 
     @Override
     protected String doInBackground(String... params) {
         String result = null;
 
         List<NameValuePair> value = new ArrayList<NameValuePair>();
-
-        value.add(new BasicNameValuePair("name", name));
-        value.add(new BasicNameValuePair("description", description));
-        value.add(new BasicNameValuePair("member", members));
-        android.util.Log.d("Task","AddTeamTask");
+        value.add(new BasicNameValuePair("user1", user1));
+        value.add(new BasicNameValuePair("user2", user2));
+        android.util.Log.d("Task","AddReviewTask");
         serviceHandler = new ServiceHandler();
         inputStream = serviceHandler.makeServiceCall(
-                serverURL.local_host_url+"giira/index.php/team/addteam",2,
+                ""+serverURL.local_host_url+"giira/index.php/friends/checkstatus?",1,
                 value);
         parsing = new JSONParser();
 
         try {
-            JSONObject json = parsing.getJSONFromResponse(inputStream);
+            json = parsing.getJSONFromResponse(inputStream);
             result = String.valueOf(json.getBoolean("response"));
-            Toast.makeText(context,result,Toast.LENGTH_LONG).show();
 
         } catch (IOException e) {
             // TODO Auto-generated catch block
@@ -80,29 +75,25 @@ public class AddTeamTask extends AsyncTask<String,Void,String> {
     @Override
     protected void onPostExecute(String result) {
         super.onPostExecute(result);
+        String status;
 
-        if(result.matches("true")){
-            Toast.makeText(context, "successfully added", Toast.LENGTH_SHORT).show();
-        }
-
-        /*{
-            if(newTeam!=null)
-            {
-                Toast.makeText(context, "successfully added", Toast.LENGTH_SHORT).show();
+        if(result.matches("true"))
+        {
+            try {
+                status=json.getString("status");
+                userProfileActivity.setButtonText(status);
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
 
         }
         else
         {
-            if(newTeam!=null)
-            {
-                Toast.makeText(context, "Insertion Failed", Toast.LENGTH_SHORT).show();
-            }
 
-        }*/
-        else{
             Toast.makeText(context, "Insertion Failed", Toast.LENGTH_SHORT).show();
+
         }
+
 
     }
 }
