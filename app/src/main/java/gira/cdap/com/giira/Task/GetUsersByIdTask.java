@@ -3,6 +3,7 @@ package gira.cdap.com.giira.Task;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.widget.Toast;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
@@ -39,12 +40,10 @@ public  class GetUsersByIdTask extends AsyncTask<String, Void, String> {
 
 ProgressDialog prgDialog;
 
-    public GetUsersByIdTask(Context context, String userid,String name, String email, UserProfileActivity userProfileActivity)
+    public GetUsersByIdTask(Context context, String userid, UserProfileActivity userProfileActivity)
     {
         this.userid=userid;
         this.context = context;
-        this.name=name;
-        this.email=email;
         this.userProfileActivity=userProfileActivity;
     }
     @Override
@@ -64,12 +63,11 @@ ProgressDialog prgDialog;
         String result = null;
 
         List<NameValuePair> value = new ArrayList<NameValuePair>();
-        value.add(new BasicNameValuePair("id",null));
+        value.add(new BasicNameValuePair("id",userid));
 
 
-//        Log.d("Task", "placeTaskImport");
         serviceHandler = new ServiceHandler();
-        is = serviceHandler.makeServiceCall(serverURL.local_host_url+"giira/index.php//friends/getfriendsbyid?id="+userid,1,value);
+        is = serviceHandler.makeServiceCall(serverURL.local_host_url+"giira/index.php/friends/getuserdetailsbyid?id="+userid,1,value);
         parsing = new JSONParser();
         try {
             json = parsing.getJSONFromResponse(is);
@@ -105,9 +103,11 @@ ProgressDialog prgDialog;
             for (int i = 0; i < user.length(); i++) {
 
                  name=user.getJSONObject(i).getString("name");
+                 email=user.getJSONObject(i).getString("email");
 
             }
-            userProfileActivity.set(user);
+            Toast.makeText(context,name+"    "+email,Toast.LENGTH_SHORT ).show();
+            userProfileActivity.set(name,email);
 
 
         } catch (JSONException e) {

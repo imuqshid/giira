@@ -35,6 +35,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".CheckinActivity"></activity>
+        <activity android:name=".NotificationLayout"></activity>
         <activity android:name=".ProfileFragment"></activity>
         <activity android:name=".ProfileActivityFrame"></activity>
         <activity android:name=".FriendRequestFrame"></activity>

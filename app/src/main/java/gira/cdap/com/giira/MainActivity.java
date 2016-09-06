@@ -61,6 +61,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         initalize();
 
 
@@ -111,6 +112,17 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         profileIcon = (ImageButton) findViewById(R.id.profileIcon);
         profileIcon.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View view) {
+                Intent i = new Intent(MainActivity.this,
+                        ProfileFragment.class);
+                startActivity(i);
+                finish();
+            }
+        });
+
+        ImageButton notificationIcon = (ImageButton) findViewById(R.id.notificationicon);
+        notificationIcon.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View view) {
                 Intent i = new Intent(MainActivity.this,

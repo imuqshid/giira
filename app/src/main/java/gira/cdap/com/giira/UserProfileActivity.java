@@ -44,6 +44,9 @@ public class UserProfileActivity extends AppCompatActivity {
         btn_friend=(Button)findViewById(R.id.btn_friend);
         popupMenu=new PopupMenu(UserProfileActivity.this,btn_friend);
 
+        TextView name_tv= (TextView)findViewById(R.id.username1);
+        TextView email_tv= (TextView)findViewById(R.id.useremail);
+
         ImageButton homeIcon = (ImageButton) findViewById(R.id.back);
         homeIcon.setOnClickListener(new View.OnClickListener() {
 
@@ -61,16 +64,19 @@ public class UserProfileActivity extends AppCompatActivity {
         if (!session.isLoggedIn()) {
             logoutUser();
         }
+
+        // Fetching user details from sqlite
+
+        id=getIntent().getExtras().getString("id");
         user=db.getUserDetails();
         uid=user.get("uid");
         GetFriendStatus sTask=new GetFriendStatus(getApplicationContext(),uid,id,UserProfileActivity.this);
         sTask.execute();
 
         initalize();
-        set(email,name);
 
-        uid=getIntent().getExtras().getString("id");
-        GetUsersByIdTask getUsersByIdTask=new GetUsersByIdTask(getApplicationContext(),uid,name,email,UserProfileActivity.this);
+
+        GetUsersByIdTask getUsersByIdTask=new GetUsersByIdTask(getApplicationContext(),id,UserProfileActivity.this);
         getUsersByIdTask.execute();
 
         popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
@@ -182,7 +188,8 @@ public class UserProfileActivity extends AppCompatActivity {
         email_tv.setText(email);;
     }
 
-    public void set(JSONArray user) {
+
+    public void set(String name) {
 
     }
 }
