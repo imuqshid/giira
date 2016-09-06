@@ -75,10 +75,8 @@ public class CheckinActivity extends FragmentActivity implements OnMapReadyCallb
             clongitude=gps.getLongitude();
         }
         CameraPosition cameraPosition = new CameraPosition.Builder().target(
-                new LatLng(clatitude, clongitude)).zoom(0).build();
+                new LatLng(clatitude, clongitude)).zoom(16).build();
         mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
-
-
 
     }
 
